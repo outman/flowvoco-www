@@ -9,5 +9,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site: 'https://outman.github.io',
-  base: '/flowvoco',
+  base: '/flowvoco-www',
 });
