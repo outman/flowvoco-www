@@ -8,6 +8,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://outman.github.io',
-  base: '/flowvoco-www',
+  site: 'https://flowvoco.com',
 });
