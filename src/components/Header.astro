@@ -1,6 +1,10 @@
 ---
 import logoUrl from '../assets/logo.png?url';
-const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+const baseWithSlash = base.endsWith('/') ? base : base + '/';
+const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
+const path = Astro.url.pathname;
+const currentPath = path.startsWith(normalizedBase) ? (path.slice(normalizedBase.length) || '/') : path;
 ---
 
 <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -8,7 +12,7 @@ const currentPath = Astro.url.pathname;
     <div class="flex h-16 items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <a href="/" class="flex items-center space-x-2">
+        <a href={baseWithSlash} class="flex items-center space-x-2">
           <img src={logoUrl} alt="FlowVoco Logo" class="h-8 w-8 rounded-lg" />
           <span class="font-bold text-xl">FlowVoco</span>
         </a>
@@ -16,19 +20,19 @@ const currentPath = Astro.url.pathname;
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center space-x-6">
-        <a href="/" class={`text-sm font-medium transition-colors hover:text-primary ${currentPath === '/' ? 'text-primary' : 'text-muted-foreground'}`}>
+        <a href={baseWithSlash} class={`text-sm font-medium transition-colors hover:text-primary ${currentPath === '/' ? 'text-primary' : 'text-muted-foreground'}`}>
           首页
         </a>
-        <a href="/zh-cn/privacy" class={`text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/privacy') ? 'text-primary' : 'text-muted-foreground'}`}>
+        <a href={`${baseWithSlash}zh-cn/privacy`} class={`text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/privacy') ? 'text-primary' : 'text-muted-foreground'}`}>
           隐私政策
         </a>
-        <a href="/zh-cn/terms" class={`text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/terms') ? 'text-primary' : 'text-muted-foreground'}`}>
+        <a href={`${baseWithSlash}zh-cn/terms`} class={`text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/terms') ? 'text-primary' : 'text-muted-foreground'}`}>
           服务条款
         </a>
         <div class="flex items-center space-x-2">
-          <a href="/zh-cn/privacy" class="text-sm text-muted-foreground hover:text-primary">中文</a>
+          <a href={`${baseWithSlash}zh-cn/privacy`} class="text-sm text-muted-foreground hover:text-primary">中文</a>
           <span class="text-muted-foreground">|</span>
-          <a href="/en-us/privacy" class="text-sm text-muted-foreground hover:text-primary">English</a>
+          <a href={`${baseWithSlash}en-us/privacy`} class="text-sm text-muted-foreground hover:text-primary">English</a>
         </div>
       </nav>
 
@@ -43,19 +47,19 @@ const currentPath = Astro.url.pathname;
     <!-- Mobile Navigation -->
     <div class="md:hidden hidden" id="mobile-menu">
       <div class="py-4 space-y-4 border-t">
-        <a href="/" class={`block text-sm font-medium transition-colors hover:text-primary ${currentPath === '/' ? 'text-primary' : 'text-muted-foreground'}`}>
+        <a href={baseWithSlash} class={`block text-sm font-medium transition-colors hover:text-primary ${currentPath === '/' ? 'text-primary' : 'text-muted-foreground'}`}>
           首页
         </a>
-        <a href="/zh-cn/privacy" class={`block text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/privacy') ? 'text-primary' : 'text-muted-foreground'}`}>
+        <a href={`${baseWithSlash}zh-cn/privacy`} class={`block text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/privacy') ? 'text-primary' : 'text-muted-foreground'}`}>
           隐私政策
         </a>
-        <a href="/zh-cn/terms" class={`block text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/terms') ? 'text-primary' : 'text-muted-foreground'}`}>
+        <a href={`${baseWithSlash}zh-cn/terms`} class={`block text-sm font-medium transition-colors hover:text-primary ${currentPath.includes('/terms') ? 'text-primary' : 'text-muted-foreground'}`}>
           服务条款
         </a>
         <div class="pt-4 border-t">
           <div class="flex items-center space-x-4">
-            <a href="/zh-cn/privacy" class="text-sm text-muted-foreground hover:text-primary">中文</a>
-            <a href="/en-us/privacy" class="text-sm text-muted-foreground hover:text-primary">English</a>
+            <a href={`${baseWithSlash}zh-cn/privacy`} class="text-sm text-muted-foreground hover:text-primary">中文</a>
+            <a href={`${baseWithSlash}en-us/privacy`} class="text-sm text-muted-foreground hover:text-primary">English</a>
           </div>
         </div>
       </div>

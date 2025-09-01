@@ -1,6 +1,8 @@
 ---
 import logoUrl from '../assets/logo.png?url';
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
+const baseWithSlash = base.endsWith('/') ? base : base + '/';
 ---
 
 <footer class="border-t bg-muted/50">
@@ -33,9 +35,9 @@ const currentYear = new Date().getFullYear();
       <div>
         <h3 class="font-semibold mb-4">快速链接</h3>
         <ul class="space-y-2">
-          <li><a href="/" class="text-muted-foreground hover:text-primary transition-colors">首页</a></li>
-          <li><a href="/zh-cn/privacy" class="text-muted-foreground hover:text-primary transition-colors">隐私政策</a></li>
-          <li><a href="/zh-cn/terms" class="text-muted-foreground hover:text-primary transition-colors">服务条款</a></li>
+          <li><a href={baseWithSlash} class="text-muted-foreground hover:text-primary transition-colors">首页</a></li>
+          <li><a href={`${baseWithSlash}zh-cn/privacy`} class="text-muted-foreground hover:text-primary transition-colors">隐私政策</a></li>
+          <li><a href={`${baseWithSlash}zh-cn/terms`} class="text-muted-foreground hover:text-primary transition-colors">服务条款</a></li>
         </ul>
       </div>
 
@@ -43,8 +45,8 @@ const currentYear = new Date().getFullYear();
       <div>
         <h3 class="font-semibold mb-4">语言</h3>
         <ul class="space-y-2">
-          <li><a href="/zh-cn/privacy" class="text-muted-foreground hover:text-primary transition-colors">中文</a></li>
-          <li><a href="/en-us/privacy" class="text-muted-foreground hover:text-primary transition-colors">English</a></li>
+          <li><a href={`${baseWithSlash}zh-cn/privacy`} class="text-muted-foreground hover:text-primary transition-colors">中文</a></li>
+          <li><a href={`${baseWithSlash}en-us/privacy`} class="text-muted-foreground hover:text-primary transition-colors">English</a></li>
         </ul>
       </div>
     </div>
